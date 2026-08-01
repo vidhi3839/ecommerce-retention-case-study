@@ -1,0 +1,4 @@
+device_category,sessions,checkouts_started,purchases,checkout_to_purchase_pct,overall_conversion_pct
+desktop,208942,6392,2749,43.01,1.42
+mobile,143185,4474,1995,44.59,1.5
+tablet,8002,240,104,43.33,1.4

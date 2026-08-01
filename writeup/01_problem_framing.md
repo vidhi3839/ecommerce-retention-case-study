@@ -48,10 +48,13 @@ Scoping decisions:
    from smaller, lower-margin transactions (e.g. if removing checkout steps
    also removes an upsell opportunity).
 2. **Checkout abandonment rate** (reached begin_checkout, never reached
-   purchase) — leading indicator, and the metric most directly tied to the
-   hypothesized cause (checkout friction). To be validated in the Phase 2
-   data-quality check as a clean, well-populated event pair before being
-   finalized here.
+   purchase) — leading indicator. Confirmed via Phase 2 data-quality query
+   (`00_data_quality_check.sql`, part 2) that no refund/return events exist
+   in this dataset, ruling out "refund rate" as a usable guardrail. Checkout
+   abandonment rate replaces it as the metric most directly tied to the
+   diagnosis: 54.5% of users who ever start checkout never complete a
+   purchase within the dataset's 3-month window (see
+   `05_repeat_purchase_behavior.sql`).
 3. **Session duration** — stability guardrail. A conversion spike paired
    with collapsing session duration on checkout pages would suggest users
    are rushing through without reading key information (e.g. shipping,
@@ -70,9 +73,11 @@ Scoping decisions:
 - Before trusting funnel numbers, validated event counts and confirmed
   timestamps are strictly increasing within each user session as a basic
   sanity check (see `sql/06_data_quality_check.sql`).
-- `user_pseudo_id` is a device/browser identifier, not an authenticated user
-  ID — cross-device behavior by the same real person will appear as
-  separate sessions/users.
+- "New user" is defined at the session level (`ga_session_number = 1`), not
+  lifetime level — a user could have visited before the dataset's 3-month
+  window began and still register as "new" here. Findings about new-user
+  behavior should be read as "first observed session in this window," not
+  "first-ever visit."
 
 ## Planned Output
 

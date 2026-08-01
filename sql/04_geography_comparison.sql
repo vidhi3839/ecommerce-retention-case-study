@@ -1,0 +1,23 @@
+WITH session_level AS (
+  SELECT
+    CONCAT(user_pseudo_id, '-',
+      CAST((SELECT value.int_value FROM UNNEST(event_params) WHERE key = 'ga_session_id') AS STRING)
+    ) AS session_id,
+    ANY_VALUE(geo.country) AS country,
+    MAX(IF(event_name = 'begin_checkout', 1, 0)) AS did_begin_checkout,
+    MAX(IF(event_name = 'purchase', 1, 0)) AS did_purchase,
+    MAX(IF(event_name = 'page_view', 1, 0)) AS did_page_view
+  FROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`
+  WHERE _TABLE_SUFFIX BETWEEN '20201101' AND '20210131'
+  GROUP BY session_id
+)
+SELECT
+  country,
+  COUNT(*) AS sessions,
+  SUM(did_purchase) AS purchases,
+  ROUND(SAFE_DIVIDE(SUM(did_purchase), SUM(did_page_view)) * 100, 2) AS overall_conversion_pct
+FROM session_level
+GROUP BY country
+HAVING sessions > 500  -- filter out tiny countries so the rate isn't noise
+ORDER BY sessions DESC
+LIMIT 20;

@@ -1,0 +1,2 @@
+step1_page_view,step2_view_item,step3_add_to_cart,step4_begin_checkout,step5_purchase,pct_pageview_to_viewitem,pct_viewitem_to_addtocart,pct_addtocart_to_checkout,pct_checkout_to_purchase,overall_conversion_rate
+333683,74563,12349,4221,2176,22.35,16.56,34.18,51.55,0.65

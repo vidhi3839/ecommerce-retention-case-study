@@ -1,0 +1,3 @@
+user_type,step1_page_view,step2_view_item,step3_add_to_cart,step4_begin_checkout,step5_purchase,pct_addtocart_to_checkout,pct_checkout_to_purchase
+new_user,261017,51824,7689,2260,932,29.39,41.24
+returning_user,72666,22739,4660,1961,1244,42.08,63.44
