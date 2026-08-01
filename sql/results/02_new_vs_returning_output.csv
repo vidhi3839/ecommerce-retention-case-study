@@ -1,3 +1,3 @@
 user_type,sessions,checkouts_started,purchases,checkout_to_purchase_pct,overall_conversion_pct
 new_user,261238,5974,1780,29.8,0.68
-returning_user,98891,5132,3068,59.78,4.22
+returning_user,98891,5132,3068,59.78,3.1

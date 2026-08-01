@@ -23,7 +23,7 @@ to fix.
 ## Segment Findings
 
 **New vs. returning users — primary signal.**
-Returning users convert far better overall (4.22% vs. 0.68%), and the
+Returning users convert far better overall (3.10% vs. 0.68%), and the
 gap concentrates specifically at checkout: new users convert
 checkout-to-purchase at 41.24% vs. 63.44% for returning users. Returning
 users are ~27% of sessions but ~63% of all purchases.
